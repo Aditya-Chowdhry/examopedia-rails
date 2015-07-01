@@ -1,0 +1,16 @@
+<h1> Exams </h1>
+
+<% for exam in @exams %>
+  <div class="product">
+    <h3>
+      <%= link_to h(exam.title), exam %>
+      <%= simple_format h(exam.exam_date) %>
+    </h3>
+    <div class="actions">
+      <%= link_to "Edit", edit_exam_path(exam) %> |
+      <%= link_to "Destroy", exam, :confirm => 'Are you sure?', :method => :delete %>
+    </div>
+  </div>
+<% end %>
+
+<p><%= link_to "New exam", new_exam_path %></p>
