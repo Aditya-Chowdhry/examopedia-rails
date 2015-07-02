@@ -1,7 +1,10 @@
 class ExamsController < ApplicationController
+  respond_to :json, :html
   
   def index
     @exams = Exam.all
+    respond_with @exams.to_json(render: @exams)
+  
   end
   
   def show
