@@ -1,7 +1,7 @@
 <h1> Exams </h1>
 
 <% for exam in @exams %>
-  <div class="product">
+  <div class="exam">
     <h3>
       <%= link_to h(exam.title), exam %>
       <%= simple_format h(exam.exam_date) %>
