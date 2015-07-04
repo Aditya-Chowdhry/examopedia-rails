@@ -31,7 +31,7 @@ gem "paperclip", "~> 4.3"
 gem 'pg', '~> 0.18.1'   # Postgres interface for rails
 
 gem 'responders', '~> 2.0'
-gem "image_optim_bin", group: :production
+
 gem 'paperclip-optimizer'
 gem 'image_optim'
 gem 'image_optim_pack'
@@ -59,6 +59,7 @@ group :development, :test do
   group :production do
 gem 'pg', '~> 0.18.1'   # Postgres interface for rails
   gem 'rails_12factor', '0.0.2'
+  gem "image_optim_bin"
 end
 
 end
