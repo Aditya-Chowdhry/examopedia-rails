@@ -1,11 +1,12 @@
 class Exam < ActiveRecord::Base
 	validates :title,:description,:image, :presence => true
-	has_attached_file :image,styles: {thumb: "150x150>", medium: "700x500>", small: "350x350>"},processors: [:thumbnail, :compression]
-					   #,processors: [:thumbnail, :paperclip_optimizer]
+	has_attached_file :image,styles: {thumb: "150x150>", medium: "1024x700>", small: "350x350>"},processors: [:thumbnail, :paperclip_optimizer]
 	enum section: [:'Arts', :'Commerce',:'Science']
 	enum level: [:'Undergraduate',:'Global',:'Postgraduate']
+	#processors: [:thumbnail, :compression]
+
 	#after_save :compress_with_ffmpeg
-	 #after_post_process :compress
+	#after_post_process :compress
 
 	#http://stackoverflow.com/questions/21897725/papercliperrorsmissingrequiredvalidatorerror-with-rails-4
 	#Starting with Paperclip version 4.0, all attachments are required to include a content_type validation, a file_name validation, or to explicitly state that they're not going to have either.

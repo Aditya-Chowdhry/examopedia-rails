@@ -31,10 +31,10 @@ gem "paperclip", "~> 4.3"
 gem 'pg', '~> 0.18.1'   # Postgres interface for rails
 
 gem 'responders', '~> 2.0'
-
-#gem 'paperclip-optimizer'
-#gem 'image_optim'
-#gem 'image_optim_pack'
+gem "image_optim_bin", group: :production
+gem 'paperclip-optimizer'
+gem 'image_optim'
+gem 'image_optim_pack'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
