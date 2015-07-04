@@ -32,9 +32,9 @@ gem 'pg', '~> 0.18.1'   # Postgres interface for rails
 
 gem 'responders', '~> 2.0'
 
-gem 'paperclip-optimizer'
-gem 'image_optim'
-gem 'image_optim_pack'
+#gem 'paperclip-optimizer'
+#gem 'image_optim'
+#gem 'image_optim_pack'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -55,5 +55,11 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  group :production do
+gem 'pg', '~> 0.18.1'   # Postgres interface for rails
+  gem 'rails_12factor', '0.0.2'
+end
+
 end
 
