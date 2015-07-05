@@ -6,7 +6,7 @@ class Exam < ActiveRecord::Base
 	#processors: [:thumbnail, :compression]
 
 	#after_save :compress_with_ffmpeg
-	#after_post_process :compress
+	after_post_process :compress
 
 	#http://stackoverflow.com/questions/21897725/papercliperrorsmissingrequiredvalidatorerror-with-rails-4
 	#Starting with Paperclip version 4.0, all attachments are required to include a content_type validation, a file_name validation, or to explicitly state that they're not going to have either.
