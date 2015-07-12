@@ -1,9 +1,16 @@
 class ExamsController < ApplicationController
+    
+load_and_authorize_resource
   respond_to :json, :html
- 
+  
   def index
     @exams = Exam.all
     respond_with @exams.to_json(render: @exams)
+  end
+  
+  def approve
+    @exams = Exam.approved.newest
+    respond_with @exams
   end
   
   def show

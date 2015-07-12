@@ -1,11 +1,26 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resources :exams 
   root 'exams#index'
+  resources :notifications
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
-
+  # ----------------------------------  API ROUTES ----------------------------------------------- #
+  # http://collectiveidea.com/blog/archives/2013/06/13/building-awesome-rails-apis-part-1/
+  # Now our URls look like: http://api.example.com/v1/people or just http://api.example.com/people 
+  # if you don’t use the version, it doesn’t interfere with your regular people routes, and it looks great.
+  namespace :api, :path => "", :constraints => {:subdomain => "api"}, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :exams do
+        resources :notifications
+      end
+    end
+  end
+  
+  # ---------------------------------------------------------------------------------------------- #
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

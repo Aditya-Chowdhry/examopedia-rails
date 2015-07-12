@@ -1,19 +1,59 @@
+# create_table :exams do |t|
+   #   t.string :title
+   #   t.string :description
+   #   t.integer :section
+   #   t.integer :level
+   #   t.attachment :image
+   #   t.datetime :exam_date
+   #   t.date :form_release_date
+   #   t.date :form_last_date
+   #   t.string :link1_name
+   #   t.string :link1
+   #   t.string :link2_name
+   #   t.string :link2
+   #   t.string :link3_name
+   #   t.string :link3
+   #  t.string :link4_name
+   #   t.string :link4
+
+  #    t.timestamps null: false
+  # 
 class Exam < ActiveRecord::Base
-	validates :title,:description,:image, :presence => true
-	has_attached_file :image,styles: {thumb: "150x150>", medium: "700x500>", small: "350x350>"},processors: [:thumbnail, :paperclip_optimizer]
-	enum section: [:'Arts', :'Commerce',:'Science']
-	enum level: [:'Undergraduate',:'Global',:'Postgraduate']
-	#processors: [:thumbnail, :compression]
+  
+  validates :title,:description,:image,:level,:section ,:presence => true
+  has_attached_file :image,styles: {thumb: "150x150>", medium: "700x500>", small: "350x350>"},processors: [:thumbnail, :paperclip_optimizer]
+  enum section: [:'Arts', :'Commerce',:'Science']
+  enum level: [:'Undergraduate',:'Global',:'Postgraduate']
+  #processors: [:thumbnail, :compression]
 
-	#after_save :compress_with_ffmpeg
-#	after_post_process :compress
+  scope :approved, -> {
+  where(:exam_review => false)
+  }
+  scope :pending, -> {
+  where(:exam_review => true)
+  }
+  scope :newest,-> {
+  order("created_at desc")
+  }
 
-	#http://stackoverflow.com/questions/21897725/papercliperrorsmissingrequiredvalidatorerror-with-rails-4
-	#Starting with Paperclip version 4.0, all attachments are required to include a content_type validation, a file_name validation, or to explicitly state that they're not going to have either.
-	validates_attachment_content_type :image, :content_type => /\Aimage\/(jpg|jpeg|pjpeg|png|x-png|gif)\z/, :message => 'file type is not allowed (only jpeg/png/gif images)'
-	private
+#  def self.approve
+ #   @exams = Exam.approved.newest
+  #  return @exams
+  #end
+  #def self.pending
+   # @exams = Exam.approved.newest
+    #return @exams
+  #end
 
-	def compress_with_ffmpeg
+  #after_save :compress_with_ffmpeg
+# after_post_process :compress
+
+  #http://stackoverflow.com/questions/21897725/papercliperrorsmissingrequiredvalidatorerror-with-rails-4
+  #Starting with Paperclip version 4.0, all attachments are required to include a content_type validation, a file_name validation, or to explicitly state that they're not going to have either.
+  validates_attachment_content_type :image, :content_type => /\Aimage\/(jpg|jpeg|pjpeg|png|x-png|gif)\z/, :message => 'file type is not allowed (only jpeg/png/gif images)'
+  private
+
+  def compress_with_ffmpeg
     [:thumb, :medium, :small].each do |type|
     img_path = self.image.path(type)
     Paperclip.run("ffmpeg", " -i #{img_path} #{img_path}")
