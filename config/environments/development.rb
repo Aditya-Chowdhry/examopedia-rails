@@ -18,7 +18,7 @@ ActionMailer::Base.smtp_settings = {
                     :port           => 587,
                     :authentication => :plain,
                     :user_name      => "adityachowdhry09@gmail.com",
-                    :password       => "WINEXAMOPEDIA"
+                    :password       => "ABC"
 }
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
