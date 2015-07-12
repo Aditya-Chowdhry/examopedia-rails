@@ -1,0 +1,17 @@
+<h1> Notifications </h1>
+
+<% for notification in @notifications %>
+  <div class="notification">
+    <h3>
+      <%= link_to h(notification.title), notification %>
+      <%= simple_format h(notification.description) %>
+      <%= simple_format h(notification.date) %>
+    </h3>
+    <div class="actions">
+      <%= link_to "Edit", edit_notification_path(notification) %> |
+      <%= link_to "Destroy", notification, :confirm => 'Are you sure?', :method => :delete %>
+    </div>
+  </div>
+<% end %>
+
+<p><%= link_to "New notification", new_notification_path %></p>

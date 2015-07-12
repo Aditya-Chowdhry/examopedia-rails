@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  section: 1
+  level: 1
+  points: 1
+  career_assist: false
+  description: MyText
+  age: 1
+  courses: MyString
+  interests: MyText
+  marks10: 1
+  marks12: 1
+  marksug: 
+
+two:
+  name: MyString
+  email: MyString
+  section: 1
+  level: 1
+  points: 1
+  career_assist: false
+  description: MyText
+  age: 1
+  courses: MyString
+  interests: MyText
+  marks10: 1
+  marks12: 1
+  marksug: 

@@ -1,0 +1,24 @@
+Title:<%=@notification.title %>
+<%= image_tag @notification.image.url(:medium) %>
+
+<%= simple_format h(@notification.description) %>
+
+<p>
+  <strong>Date:</strong>
+  <%= simple_format h(@notification.date) %>
+</p>
+
+<p>
+  <strong>link1:</strong>
+  <%= link_to h(@notification.link1),@notification.link1 %>
+</p>
+<p>
+  <strong>link2:</strong>
+  <%= link_to h(@notification.link2),@notification.link1%>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_notification_path(@notification) %> |
+  <%= link_to "Destroy", @notification, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", notifications_path %>
+</p>
