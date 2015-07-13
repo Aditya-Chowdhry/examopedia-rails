@@ -90,29 +90,16 @@ GEM
       request_store (~> 1.0)
     erubis (2.7.0)
     execjs (2.5.2)
-    exifr (1.2.3)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
-    fspath (2.1.1)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     i18n (0.7.0)
-    image_optim (0.21.0)
-      exifr (~> 1.2, >= 1.2.2)
-      fspath (~> 2.1)
-      image_size (~> 1.3)
-      in_threads (~> 1.3)
-      progress (~> 3.0, >= 3.0.1)
     image_optim_bin (0.0.7)
-    image_optim_pack (0.2.1.20150702)
-      fspath (~> 2.1)
-      image_optim (~> 0.19)
-    image_size (1.4.1)
-    in_threads (1.3.1)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
       has_scope (~> 0.6.0.rc)
@@ -154,13 +141,9 @@ GEM
       os (~> 0.9.6)
       paperclip (>= 3.3)
       ruby-imagespec (~> 0.3.1)
-    paperclip-optimizer (2.0.0)
-      image_optim (~> 0.19)
-      paperclip (>= 3.4)
     pg (0.18.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
-    progress (3.1.0)
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.4)
@@ -256,14 +239,11 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   draper
-  image_optim
   image_optim_bin
-  image_optim_pack
   jbuilder (~> 2.0)
   jquery-rails
   paperclip (~> 4.3)
   paperclip-compression
-  paperclip-optimizer
   pg (~> 0.18.1)
   pundit
   rails (= 4.2.0)

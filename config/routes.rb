@@ -14,9 +14,9 @@ Rails.application.routes.draw do
   # if you don’t use the version, it doesn’t interfere with your regular people routes, and it looks great.
   namespace :api, :path => "", :constraints => {:subdomain => "api"}, defaults: {format: 'json'} do
     namespace :v1 do
-      resources :exams do
-        resources :notifications
-      end
+      resources :exams
+      resources :notifications
+      resources :users
     end
   end
   

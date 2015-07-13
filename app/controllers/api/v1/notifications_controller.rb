@@ -1,5 +1,7 @@
+module Api::V1
 class NotificationsController < ApplicationController
-  respond_to :json, :html
+  before_filter :restrict_access
+  respond_to :json
  
   def index
     @notifications = Notification.all
@@ -52,10 +54,15 @@ class NotificationsController < ApplicationController
   end
 
   private
-  
-  
+  def restrict_access
+    authenticate_or_request_with_http_token do |token, options|
+      ApiKey.exists?(access_token: token)
+     end
+  end
 
   def notification_params
+
         params.require(:notification).permit(:title, :description,:section, :level, :notification_date, :image)
   end
+end
 end

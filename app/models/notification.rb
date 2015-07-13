@@ -22,5 +22,5 @@ class Notification < ActiveRecord::Base
   scope :newest,-> {
   order("created_at desc")
   }
-
+  
 end

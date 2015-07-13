@@ -1,10 +1,11 @@
 class ExamsController < ApplicationController
     
 load_and_authorize_resource
-  respond_to :json, :html
+  respond_to :json , :html
   
   def index
     @exams = Exam.all
+    #fresh_when @exams
     respond_with @exams.to_json(render: @exams)
   end
   
@@ -15,6 +16,9 @@ load_and_authorize_resource
   
   def show
     @exam= Exam.find(params[:id])
+    if stale?(@exam)
+      respond_with @exam.to_json(render: @exam)
+    end
   end
   
   def new

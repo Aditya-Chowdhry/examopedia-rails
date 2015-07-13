@@ -1,61 +1,58 @@
+module Api::V1
 class ExamsController < ApplicationController
-  respond_to :json, :html
+  before_filter :restrict_access   
+  respond_to :json
  
   def index
     @exams = Exam.all
-    respond_with @exams.to_json(render: @exams)
+    respond_with @exams
   end
   
   def show
     @exam= Exam.find(params[:id])
+    respond_with @exam
   end
   
   def new
     @exam = Exam.new
+    respond_with @exam
   end
   
   def create
     @exam = Exam.new(exam_params)
-    if @exam.save
-      flash[:notice] = "Successfully created exam."
-      redirect_to @exam
-    else
-      render :action => 'new'
-    end
+    respond_with @exam
   end
   
   def edit
     @exam = Exam.find(params[:id])
+    respond_with @exam
   end
   
   def update
   begin
     @exam = Exam.find(params[:id])
     if @exam.update_attributes(exam_params)
-      flash[:notice] = "Successfully updated exam."
-      redirect_to @exam
-    else
-      render :action => 'edit'
+      respond_with @exam
     end
-     rescue Exception => e
-      Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
-      # Rollbar.report_exception(e)
-      nil
-    end
-  end
+   end
+ end
   
   def destroy
     @exam = Exam.find(params[:id])
-    @exam.destroy
-    flash[:notice] = "Successfully destroyed exam."
-    redirect_to exams_url
+    respond_with @exam.destroy    
   end
 
   private
   
-  
+  def restrict_access
+    authenticate_or_request_with_http_token do |token, options|
+      ApiKey.exists?(access_token: token)
+    end
+  end
 
   def exam_params
         params.require(:exam).permit(:title, :description,:section, :level, :exam_date, :image)
+  end
+  
   end
 end

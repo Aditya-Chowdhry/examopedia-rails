@@ -36,6 +36,8 @@ class Exam < ActiveRecord::Base
   order("created_at desc")
   }
 
+  
+
 #  def self.approve
  #   @exams = Exam.approved.newest
   #  return @exams
