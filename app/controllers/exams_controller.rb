@@ -16,9 +16,7 @@ load_and_authorize_resource
   
   def show
     @exam= Exam.find(params[:id])
-    if stale?(@exam)
-      respond_with @exam.to_json(render: @exam)
-    end
+    
   end
   
   def new
@@ -67,6 +65,6 @@ load_and_authorize_resource
   
 
   def exam_params
-        params.require(:exam).permit(:title, :description,:section, :level, :exam_date, :image)
+    params.require(:exam).permit(:title, :description,:section, :level, :exam_date, :image,:exam_review)
   end
 end

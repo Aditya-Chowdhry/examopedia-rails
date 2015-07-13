@@ -20,7 +20,7 @@ ActiveAdmin.register Notification do
 
   # ---------------------------------------------------------------------------------------- #
 
-  permit_params :title,:description,:link1,:link2,:link1_name,:link2_name,:exam_date,:form_date,:result_date
+  permit_params :title,:description,:link1,:link2,:link1_name,:link2_name,:exam_date,:form_date,:result_date,:notification_review
   # ---------------------------------------------------------------------------------------- #
 
   form :html => { :enctype => "multipart/form-data" } do |f|

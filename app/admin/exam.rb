@@ -40,7 +40,7 @@ ActiveAdmin.register Exam do
 
   # ---------------------------------------------------------------------------------------- #
 
-  permit_params :title,:description,:image,:section,:level,:link1,:link2,:link3,:link4,:link1_name,:link2_name,:link3_name,:link4_name,:exam_date,:form_release_date,:form_last_date
+  permit_params :title,:description,:image,:section,:level,:link1,:link2,:link3,:link4,:link1_name,:link2_name,:link3_name,:link4_name,:exam_date,:form_release_date,:form_last_date,:exam_review
   # ---------------------------------------------------------------------------------------- #
 
   form :html => { :enctype => "multipart/form-data" } do |f|
@@ -61,6 +61,9 @@ ActiveAdmin.register Exam do
       f.input :link3_name
       f.input :link4_name
       f.input :link4
+      if current_admin_user.role=="admin"
+      f.input :exam_review,as: :boolean,:label=> "Check=>Approve Uncheck=>pending"
+      end
       # f.inputs do
       #   f.has_many :finds, heading: 'Finds', allow_destroy: true, new_record: 'Add Find' do |find_f|
       #     # find_f.inputs

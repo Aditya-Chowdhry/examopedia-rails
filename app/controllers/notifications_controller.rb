@@ -58,6 +58,6 @@ load_and_authorize_resource
   
 
   def notification_params
-        params.require(:notification).permit(:title, :description,:section, :level, :notification_date, :image)
+        params.require(:notification).permit(:title, :description,:section, :level, :notification_date, :image,:notification_review)
   end
 end
