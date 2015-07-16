@@ -20,8 +20,8 @@
   # 
 class Exam < ActiveRecord::Base
   
-  validates :title,:description,:image,:level,:section ,:presence => true
-  has_attached_file :image,styles: {thumb: "150x150>", medium: "700x500>", small: "350x350>"},processors: [:thumbnail, :paperclip_optimizer]
+  #validates :title,:description,:image,:level,:section ,:presence => true
+  has_attached_file :image,styles: {thumb: "150x150>", medium: "700x500>", small: "350x350>"},processors: [:thumbnail, :compression]
   enum section: [:'Arts', :'Commerce',:'Science']
   enum level: [:'Undergraduate',:'Global',:'Postgraduate']
   #processors: [:thumbnail, :compression]

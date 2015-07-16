@@ -4,12 +4,12 @@ class ExamsController < ApplicationController
   respond_to :json
  
   def index
-    @exams = Exam.all
+    @exams = Exam.approved.newest.all
     respond_with @exams
   end
   
   def show
-    @exam= Exam.find(params[:id])
+    @exam= Exam.approved.find(params[:id])
     respond_with @exam
   end
   

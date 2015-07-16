@@ -25,7 +25,7 @@ ActiveAdmin.register_page "Dashboard" do
          panel "Approved Notifications" do
            ul do
              Notification.approved.newest.each do |notification|
-              li link_to(notification.title, admin_notification_path(exam))
+              li link_to(notification.title, admin_notification_path(notification))
              end
            end
          end
@@ -42,7 +42,7 @@ ActiveAdmin.register_page "Dashboard" do
          panel "Pending Notifications" do
            ul do
              Notification.pending.newest.each do |notification|
-              li link_to(notification.title, admin_notification_path(exam))
+              li link_to(notification.title, admin_notification_path(notification))
              end
            end
          end

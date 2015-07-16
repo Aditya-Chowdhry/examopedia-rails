@@ -33,14 +33,19 @@ ActiveAdmin.register Exam do
    #   t.string :link3
    #  t.string :link4_name
    #   t.string :link4
-
+   # t.integer  "gen_fees_boys"
+   # t.integer  "gen_fees_girls"
+   # t.integer  "sc_fees_boys"
+   # t.integer  "sc_fees_girls"
+   # t.string   "others_note"
+   # t.integer  "others"
   #    t.timestamps null: false
   # 
   menu priority: 3
 
   # ---------------------------------------------------------------------------------------- #
 
-  permit_params :title,:description,:image,:section,:level,:link1,:link2,:link3,:link4,:link1_name,:link2_name,:link3_name,:link4_name,:exam_date,:form_release_date,:form_last_date,:exam_review
+  permit_params :title,:description,:image,:section,:level,:link1,:link2,:link3,:link4,:link1_name,:link2_name,:link3_name,:link4_name,:exam_date,:form_release_date,:form_last_date,:exam_review,:gen_fees_boys,:gen_fees_girls,:sc_fees_girls,:sc_fees_boys,:others_note,:others
   # ---------------------------------------------------------------------------------------- #
 
   form :html => { :enctype => "multipart/form-data" } do |f|
@@ -61,8 +66,14 @@ ActiveAdmin.register Exam do
       f.input :link3_name
       f.input :link4_name
       f.input :link4
+      f.input :gen_fees_boys , :label => "Gen Boys fees-integer"
+      f.input :gen_fees_girls ,:label => "Gen Girls fees-integer"
+      f.input :sc_fees_boys , :label => "Sc/st/obc Boys Fees -integer"
+      f.input :sc_fees_girls, :label => "Sc/st/obc Girls Fees -integer"
+      f.input :others_note ,:label => "Some other fees if given. Give name of fees-string."
+      f.input :others, :label => "Other fees-integer . (If other fees given)"
       if current_admin_user.role=="admin"
-      f.input :exam_review,as: :boolean,:label=> "Check=>Approve Uncheck=>pending"
+      f.input :exam_review,as: :boolean,:label=> "Check=>Pending Uncheck=>Approve"
       end
       # f.inputs do
       #   f.has_many :finds, heading: 'Finds', allow_destroy: true, new_record: 'Add Find' do |find_f|
@@ -111,6 +122,7 @@ ActiveAdmin.register Exam do
     #  row :tag_list
     #  row :description
     # row :ideal_price
+
     show do |exam|
       attributes_table do
    
@@ -133,13 +145,19 @@ ActiveAdmin.register Exam do
       row :link3_name
       row :link4_name
       row :link4
+      row :gen_fees_boys
+      row :gen_fees_girls
+      row :sc_fees_boys
+      row :sc_fees_girls
+      row :others_note
+      row :others
       
       row :created_at
       row :updated_at 
 
     end
-  end
-
+  
+end
   # ---------------------------------------------------------------------------------------- #
 
   
@@ -151,18 +169,28 @@ ActiveAdmin.register Exam do
     def create
       @exam =Exam.new(permitted_params[:exam])
       if @exam.save
-        redirect_to admin_exam_path(@exam.id), :flash => { :error => @exam.errors.full_messages.join(', ') }
+        redirect_to admin_exam_path(@exam.id), :flash => { :error => "Successfully created" }
       else
         redirect_to admin_exams_path, :flash => { :error => @exam.errors.full_messages.join(', ') }
       end
     end
 
     def update
-      # Good
+      
       @exam = Exam.find(permitted_params[:id])
+      if current_admin_user.role=="moderator"
+        if !@exam.exam_review?
+          redirect_to admin_exams_path,:flash => { :error =>"You cannot edit an approved exam" }
+          return
+          #redirect doesn't endthe action. So to end the action one can use return
+        end
+      end  
       @id = permitted_params[:id]
-      @exam.update_attributes(permitted_params[:exam])
-      redirect_to admin_exam_path(@id), :flash => { :error => @exam.errors.full_messages.join(', ') }
+      if @exam.update_attributes(permitted_params[:exam])
+       redirect_to admin_exam_path(@id),:flash => { :error =>"Successfully Updated" }
+      else
+      redirect_to admin_exam_path(@id), :flash => { :error =>"Error Occured try again." }
+      end
     end
   end
 
