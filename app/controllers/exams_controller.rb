@@ -4,9 +4,16 @@ load_and_authorize_resource
   respond_to :json , :html
   
   def index
-    @exams = Exam.all
-    #fresh_when @exams
-    respond_with @exams.to_json(render: @exams)
+     @exams = Exam.where(nil).order("title DESC")
+      
+      if stale? etag: @exams
+      respond_with @exams.to_json(render: @exams)
+      else
+        
+      end  
+      #fresh_when last_modified: @exams.maximum(:updated_at)
+      #fresh_when @exams
+    #respond_with @exams.to_json(render: @exams)
   end
   
   def approve

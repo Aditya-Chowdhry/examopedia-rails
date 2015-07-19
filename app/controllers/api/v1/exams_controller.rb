@@ -4,8 +4,10 @@ class ExamsController < ApplicationController
   respond_to :json
  
   def index
-    @exams = Exam.approved.newest.all
-    respond_with @exams
+      @exams = Exam.where(nil).order("title DESC")
+      
+      fresh_when last_modified: @exams.maximum(:updated_at)
+  
   end
   
   def show
