@@ -4,7 +4,7 @@ load_and_authorize_resource
   respond_to :json , :html
   
   def index
-     @exams = Exam.where(nil).order("title DESC")
+     @exams = Exam.approved.where(nil).order("title DESC")
       
       if stale? etag: @exams
       respond_with @exams.to_json(render: @exams)

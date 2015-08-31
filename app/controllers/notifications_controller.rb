@@ -2,10 +2,16 @@ class NotificationsController < ApplicationController
   
 load_and_authorize_resource
   respond_to :json, :html
- 
+  error="Not new content availaible"
   def index
-    @notifications = Notification.all
-    respond_with @notifications.to_json(render: @notifications)
+     @notifications = Notification.approved.where(nil).order("title DESC")
+      
+      if stale? etag: @notifications
+      respond_with @notifications.to_json(render: @notifications)
+      else
+      respond_with error.to_json  
+      end 
+
   end
   
   def show

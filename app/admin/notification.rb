@@ -45,6 +45,9 @@ ActiveAdmin.register Notification do
       #   # find_f.input :image, hint: find_f.find.image? ? image_tag(f.post.image.url, height: '200') : content_tag(:span, "Upload JPG/PNG/GIF image")
       #   end
       # end
+      if current_admin_user.role=="admin"
+      f.input :notification_review,as: :boolean,:label=> "Check=>Pending Uncheck=>Approve"
+      end
     end
     f.actions
   end
