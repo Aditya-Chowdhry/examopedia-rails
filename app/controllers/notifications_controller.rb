@@ -1,27 +1,25 @@
 class NotificationsController < ApplicationController
-  
+
 load_and_authorize_resource
   respond_to :json, :html
-  error="Not new content availaible"
   def index
      @notifications = Notification.approved.where(nil).order("title DESC")
-      
+
       if stale? etag: @notifications
       respond_with @notifications.to_json(render: @notifications)
       else
-      respond_with error.to_json  
-      end 
+      end
 
   end
-  
+
   def show
     @notification= Notification.find(params[:id])
   end
-  
+
   def new
     @notification = Notification.new
   end
-  
+
   def create
     @notification = Notification.new(notification_params)
     if @notification.save
@@ -31,11 +29,11 @@ load_and_authorize_resource
       render :action => 'new'
     end
   end
-  
+
   def edit
     @notification = Notification.find(params[:id])
   end
-  
+
   def update
   begin
     @notification = Notification.find(params[:id])
@@ -51,7 +49,7 @@ load_and_authorize_resource
       nil
     end
   end
-  
+
   def destroy
     @notification = Notification.find(params[:id])
     @notification.destroy
@@ -60,8 +58,8 @@ load_and_authorize_resource
   end
 
   private
-  
-  
+
+
 
   def notification_params
         params.require(:notification).permit(:title, :description,:section, :level, :notification_date, :image,:notification_review)
