@@ -16,7 +16,8 @@ ActiveAdmin.register_page "Dashboard" do
        column do
          panel "Approved Exams" do
            ul do
-             Exam.approved.newest.each do |exam|
+             exams=Exam.approved.newest
+             exams.each do |exam|
               li link_to(exam.title, admin_exam_path(exam))
              end
            end
@@ -29,7 +30,17 @@ ActiveAdmin.register_page "Dashboard" do
              end
            end
          end
+
+         panel "Approved Articles" do
+           ul do
+             Article.approved.newest.each do |article|
+              li link_to(article.title, admin_article_path(article))
+             end
+           end
+         end
+
        end
+
 
        column do
          panel "Pending Exams" do
@@ -46,6 +57,15 @@ ActiveAdmin.register_page "Dashboard" do
              end
            end
          end
+
+         panel "Pending Articles" do
+           ul do
+             Article.pending.newest.each do |article|
+              li link_to(article.title, admin_article_path(article))
+             end
+           end
+         end
+
        end
      end
   end # content

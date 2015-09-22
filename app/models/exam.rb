@@ -17,11 +17,13 @@
    #   t.string :link4
 
   #    t.timestamps null: false
-  # 
+  #
 class Exam < ActiveRecord::Base
-  
+
   #validates :title,:description,:image,:level,:section ,:presence => true
   has_attached_file :image,styles: {thumb: "150x150>", medium: "700x500>", small: "350x350>"},processors: [:thumbnail, :compression]
+  validates_attachment_content_type :image, :content_type => /\Aimage\/(jpg|jpeg|pjpeg|png|x-png|gif)\z/, :message => 'file type is not allowed (only jpeg/png/gif images)'
+  
   enum section: [:'Arts', :'Commerce',:'Science']
   enum level: [:'Undergraduate',:'Global',:'Postgraduate']
   #processors: [:thumbnail, :compression]
@@ -36,7 +38,7 @@ class Exam < ActiveRecord::Base
   order("created_at desc")
   }
 
-  
+
 
 #  def self.approve
  #   @exams = Exam.approved.newest
@@ -97,6 +99,6 @@ class Exam < ActiveRecord::Base
     compressed_size = File.size(file.path)
     compressed_ratio = (current_size - compressed_size) / current_size.to_f
     logger.debug("#{current_size} - #{compressed_size} - #{compressed_ratio}")
-    logger.debug("PNG family compressed, compressed: #{ '%.2f' % (compressed_ratio * 100) }%")   
-  end              
+    logger.debug("PNG family compressed, compressed: #{ '%.2f' % (compressed_ratio * 100) }%")
+  end
 end

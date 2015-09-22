@@ -2,20 +2,20 @@ module Api::V1
 class NotificationsController < ApplicationController
   before_filter :restrict_access
   respond_to :json
- 
+
   def index
     @notifications = Notification.all
     respond_with @notifications.to_json(render: @notifications)
   end
-  
+
   def show
     @notification= Notification.find(params[:id])
   end
-  
+
   def new
     @notification = Notification.new
   end
-  
+
   def create
     @notification = Notification.new(notification_params)
     if @notification.save
@@ -25,11 +25,11 @@ class NotificationsController < ApplicationController
       render :action => 'new'
     end
   end
-  
+
   def edit
     @notification = Notification.find(params[:id])
   end
-  
+
   def update
   begin
     @notification = Notification.find(params[:id])
@@ -45,7 +45,7 @@ class NotificationsController < ApplicationController
       nil
     end
   end
-  
+
   def destroy
     @notification = Notification.find(params[:id])
     @notification.destroy
