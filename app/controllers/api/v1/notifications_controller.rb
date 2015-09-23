@@ -1,6 +1,6 @@
 module Api::V1
 class NotificationsController < ApplicationController
-  before_filter :restrict_access
+#  before_filter :restrict_access
   respond_to :json
 
   def index

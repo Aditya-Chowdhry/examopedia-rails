@@ -22,7 +22,7 @@ class ArticlesController < ApplicationController
 
     def show
       @article= Article.find(params[:id])
-
+      respond_with @article.to_json(render: @article)
     end
 
     def new

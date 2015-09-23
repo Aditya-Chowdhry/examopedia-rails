@@ -14,6 +14,8 @@ load_and_authorize_resource
 
   def show
     @notification= Notification.find(params[:id])
+    respond_with @notification.to_json(render: @notification)
+
   end
 
   def new
