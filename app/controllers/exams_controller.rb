@@ -1,35 +1,36 @@
 class ExamsController < ApplicationController
-    
+
 load_and_authorize_resource
   respond_to :json , :html
-  
+
   def index
      @exams = Exam.approved.where(nil).order("title DESC")
-      
+
       if stale? etag: @exams
       respond_with @exams.to_json(render: @exams)
       else
-        
-      end  
+
+      end
       #fresh_when last_modified: @exams.maximum(:updated_at)
       #fresh_when @exams
     #respond_with @exams.to_json(render: @exams)
   end
-  
+
   def approve
     @exams = Exam.approved.newest
     respond_with @exams
   end
-  
+
   def show
     @exam= Exam.find(params[:id])
-    
+    respond_with @exam.to_json(render: @exam)
+
   end
-  
+
   def new
     @exam = Exam.new
   end
-  
+
   def create
     @exam = Exam.new(exam_params)
     if @exam.save
@@ -39,11 +40,11 @@ load_and_authorize_resource
       render :action => 'new'
     end
   end
-  
+
   def edit
     @exam = Exam.find(params[:id])
   end
-  
+
   def update
   begin
     @exam = Exam.find(params[:id])
@@ -59,7 +60,7 @@ load_and_authorize_resource
       nil
     end
   end
-  
+
   def destroy
     @exam = Exam.find(params[:id])
     @exam.destroy
@@ -68,8 +69,8 @@ load_and_authorize_resource
   end
 
   private
-  
-  
+
+
 
   def exam_params
     params.require(:exam).permit(:title, :description,:section, :level, :exam_date, :image,:exam_review)
