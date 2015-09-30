@@ -42,14 +42,14 @@ gem 'responders', '~> 2.0'
 #gem 'image_optim_pack'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'therubyracer',  platforms: :ruby
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'paperclip-compression'
 #gem 'smusher', '~> 0.4.9'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'passenger'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -62,10 +62,9 @@ group :development, :test do
   gem 'spring'
 
   group :production do
-gem 'pg', '~> 0.18.1'   # Postgres interface for rails
+  gem 'pg', '~> 0.18.1'   # Postgres interface for rails
   gem 'rails_12factor', '0.0.2'
   gem "image_optim_bin"
 end
 
 end
-

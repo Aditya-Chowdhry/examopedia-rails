@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :notifications
   resources :articles
   resources :comments
-
+  resources :likes
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   # ----------------------------------  API ROUTES ----------------------------------------------- #
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
         resources :comments
         end
       end
-  
+
   end
 
   # ---------------------------------------------------------------------------------------------- #
