@@ -142,9 +142,6 @@ GEM
       os (~> 0.9.6)
       paperclip (>= 3.3)
       ruby-imagespec (~> 0.3.1)
-    passenger (5.0.20)
-      rack
-      rake (>= 0.8.1)
     pg (0.18.2)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
@@ -252,7 +249,6 @@ DEPENDENCIES
   jquery-rails
   paperclip (~> 4.3)
   paperclip-compression
-  passenger
   pg (~> 0.18.1)
   pundit
   rails (= 4.2.0)

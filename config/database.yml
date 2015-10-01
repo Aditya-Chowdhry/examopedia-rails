@@ -25,6 +25,7 @@ test:
   password: test
 
 production:
+  adapter: postgresql  
   host: ENV['RDS_POSTGRES_HOST']
   port: ENV['RDS_POSTGRES_PORT']
   username: ENV['RDS_POSTGRES_USERNAME']
