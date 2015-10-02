@@ -41,7 +41,7 @@ gem 'responders', '~> 2.0'
 #gem 'image_optim_pack'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'therubyracer',  platforms: :ruby
+#gem 'therubyracer',  platforms: :ruby
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'paperclip-compression'
